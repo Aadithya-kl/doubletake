@@ -1,0 +1,2729 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "DoubleTake",
+          "version": "0.2.0",
+          "informationUri": "https://github.com/Aadithya-kl/doubletake",
+          "rules": [
+            {
+              "id": "pdf.white_text",
+              "name": "White-on-white text",
+              "shortDescription": {
+                "text": "Split-view leak: White-on-white text"
+              },
+              "fullDescription": {
+                "text": "Payload drawn in white on a white page."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "pdf.tiny_font",
+              "name": "Microscopic font",
+              "shortDescription": {
+                "text": "Split-view leak: Microscopic font"
+              },
+              "fullDescription": {
+                "text": "Payload drawn at 0.5pt."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "pdf.render_mode_3",
+              "name": "Invisible render mode",
+              "shortDescription": {
+                "text": "Split-view leak: Invisible render mode"
+              },
+              "fullDescription": {
+                "text": "Text render mode 3 (no fill, no stroke)."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "pdf.off_page",
+              "name": "Off-page coordinates",
+              "shortDescription": {
+                "text": "Split-view leak: Off-page coordinates"
+              },
+              "fullDescription": {
+                "text": "Payload placed outside the MediaBox."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "pdf.covered",
+              "name": "Covered by shape",
+              "shortDescription": {
+                "text": "Split-view leak: Covered by shape"
+              },
+              "fullDescription": {
+                "text": "Payload drawn, then painted over by an opaque rectangle."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "pdf.clipped",
+              "name": "Clipped away",
+              "shortDescription": {
+                "text": "Split-view leak: Clipped away"
+              },
+              "fullDescription": {
+                "text": "Payload drawn inside a 1x1pt clipping path."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "pdf.alpha_zero",
+              "name": "Zero opacity",
+              "shortDescription": {
+                "text": "Split-view leak: Zero opacity"
+              },
+              "fullDescription": {
+                "text": "Payload drawn with fill alpha 0."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "pdf.metadata",
+              "name": "Document metadata",
+              "shortDescription": {
+                "text": "Split-view leak: Document metadata"
+              },
+              "fullDescription": {
+                "text": "Payload in Subject/Keywords info fields."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "docx.hidden_run",
+              "name": "Hidden run (w:vanish)",
+              "shortDescription": {
+                "text": "Split-view leak: Hidden run (w:vanish)"
+              },
+              "fullDescription": {
+                "text": "Payload in a run with the Word 'hidden' property."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "docx.white_text",
+              "name": "White text",
+              "shortDescription": {
+                "text": "Split-view leak: White text"
+              },
+              "fullDescription": {
+                "text": "Payload coloured white."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "docx.tiny_font",
+              "name": "1pt font",
+              "shortDescription": {
+                "text": "Split-view leak: 1pt font"
+              },
+              "fullDescription": {
+                "text": "Payload at 1pt."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "docx.core_properties",
+              "name": "Core properties",
+              "shortDescription": {
+                "text": "Split-view leak: Core properties"
+              },
+              "fullDescription": {
+                "text": "Payload in keywords/comments metadata."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "docx.unicode_tags",
+              "name": "Unicode tag smuggling",
+              "shortDescription": {
+                "text": "Split-view leak: Unicode tag smuggling"
+              },
+              "fullDescription": {
+                "text": "Payload encoded as invisible U+E00xx tag characters."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "xlsx.hidden_sheet",
+              "name": "Hidden worksheet",
+              "shortDescription": {
+                "text": "Split-view leak: Hidden worksheet"
+              },
+              "fullDescription": {
+                "text": "Payload on a sheet with state=hidden."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "xlsx.very_hidden_sheet",
+              "name": "Very hidden worksheet",
+              "shortDescription": {
+                "text": "Split-view leak: Very hidden worksheet"
+              },
+              "fullDescription": {
+                "text": "Payload on a sheet with state=veryHidden (cannot be unhidden from Excel's UI)."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "xlsx.hidden_row",
+              "name": "Hidden row",
+              "shortDescription": {
+                "text": "Split-view leak: Hidden row"
+              },
+              "fullDescription": {
+                "text": "Payload in a hidden row."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "xlsx.hidden_column",
+              "name": "Hidden column",
+              "shortDescription": {
+                "text": "Split-view leak: Hidden column"
+              },
+              "fullDescription": {
+                "text": "Payload in a hidden column."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "xlsx.white_text",
+              "name": "White text",
+              "shortDescription": {
+                "text": "Split-view leak: White text"
+              },
+              "fullDescription": {
+                "text": "Payload in a white-font cell."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "xlsx.cell_comment",
+              "name": "Cell comment",
+              "shortDescription": {
+                "text": "Split-view leak: Cell comment"
+              },
+              "fullDescription": {
+                "text": "Payload in a cell comment (not printed)."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "pptx.speaker_notes",
+              "name": "Speaker notes",
+              "shortDescription": {
+                "text": "Split-view leak: Speaker notes"
+              },
+              "fullDescription": {
+                "text": "Payload in the slide's speaker notes."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "pptx.off_slide",
+              "name": "Off-slide shape",
+              "shortDescription": {
+                "text": "Split-view leak: Off-slide shape"
+              },
+              "fullDescription": {
+                "text": "Text box positioned beyond the slide edge."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "pptx.white_text",
+              "name": "White text",
+              "shortDescription": {
+                "text": "Split-view leak: White text"
+              },
+              "fullDescription": {
+                "text": "Payload coloured white on a white slide."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "pptx.tiny_font",
+              "name": "1pt font",
+              "shortDescription": {
+                "text": "Split-view leak: 1pt font"
+              },
+              "fullDescription": {
+                "text": "Payload at 1pt."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "pptx.hidden_shape",
+              "name": "Hidden shape",
+              "shortDescription": {
+                "text": "Split-view leak: Hidden shape"
+              },
+              "fullDescription": {
+                "text": "Text box with cNvPr hidden=1."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "pptx.behind_shape",
+              "name": "Covered by shape",
+              "shortDescription": {
+                "text": "Split-view leak: Covered by shape"
+              },
+              "fullDescription": {
+                "text": "Text box covered by an opaque white rectangle."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "html.display_none",
+              "name": "display:none",
+              "shortDescription": {
+                "text": "Split-view leak: display:none"
+              },
+              "fullDescription": {
+                "text": "Payload in an element with display:none."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "html.font_size_zero",
+              "name": "font-size:0",
+              "shortDescription": {
+                "text": "Split-view leak: font-size:0"
+              },
+              "fullDescription": {
+                "text": "Payload with zero font size."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "html.color_match",
+              "name": "Colour-matched text",
+              "shortDescription": {
+                "text": "Split-view leak: Colour-matched text"
+              },
+              "fullDescription": {
+                "text": "White text on white background."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "html.offscreen",
+              "name": "Off-screen positioning",
+              "shortDescription": {
+                "text": "Split-view leak: Off-screen positioning"
+              },
+              "fullDescription": {
+                "text": "Absolutely positioned at left:-9999px."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "html.comment",
+              "name": "HTML comment",
+              "shortDescription": {
+                "text": "Split-view leak: HTML comment"
+              },
+              "fullDescription": {
+                "text": "Payload inside <!-- -->."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "html.img_alt",
+              "name": "Image alt text",
+              "shortDescription": {
+                "text": "Split-view leak: Image alt text"
+              },
+              "fullDescription": {
+                "text": "Payload as alt text of a 1x1 image."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "html.aria_label",
+              "name": "aria-label attribute",
+              "shortDescription": {
+                "text": "Split-view leak: aria-label attribute"
+              },
+              "fullDescription": {
+                "text": "Payload in an aria-label on an empty span."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "html.unicode_tags",
+              "name": "Unicode tag smuggling",
+              "shortDescription": {
+                "text": "Split-view leak: Unicode tag smuggling"
+              },
+              "fullDescription": {
+                "text": "Payload as invisible tag characters."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "eml.plain_html_mismatch",
+              "name": "text/plain vs text/html mismatch",
+              "shortDescription": {
+                "text": "Split-view leak: text/plain vs text/html mismatch"
+              },
+              "fullDescription": {
+                "text": "Client shows the HTML part; the plain-text alternative carries the payload."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "eml.html_display_none",
+              "name": "Hidden HTML in email",
+              "shortDescription": {
+                "text": "Split-view leak: Hidden HTML in email"
+              },
+              "fullDescription": {
+                "text": "display:none payload in the HTML body."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "eml.custom_header",
+              "name": "Custom X- header",
+              "shortDescription": {
+                "text": "Split-view leak: Custom X- header"
+              },
+              "fullDescription": {
+                "text": "Payload in a non-displayed X- header."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "pdf.white_text",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pypdf' passes hidden content to the model (White-on-white text); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_white_text.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pypdf"
+          }
+        },
+        {
+          "ruleId": "pdf.white_text",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pypdf+metadata' passes hidden content to the model (White-on-white text); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_white_text.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pypdf+metadata"
+          }
+        },
+        {
+          "ruleId": "pdf.white_text",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pdfplumber' passes hidden content to the model (White-on-white text); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_white_text.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pdfplumber"
+          }
+        },
+        {
+          "ruleId": "pdf.white_text",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pdfminer.six' passes hidden content to the model (White-on-white text); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_white_text.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pdfminer.six"
+          }
+        },
+        {
+          "ruleId": "pdf.white_text",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pdftotext' passes hidden content to the model (White-on-white text); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_white_text.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pdftotext"
+          }
+        },
+        {
+          "ruleId": "pdf.white_text",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (White-on-white text); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_white_text.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "pdf.tiny_font",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pypdf' passes hidden content to the model (Microscopic font); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_tiny_font.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pypdf"
+          }
+        },
+        {
+          "ruleId": "pdf.tiny_font",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pypdf+metadata' passes hidden content to the model (Microscopic font); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_tiny_font.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pypdf+metadata"
+          }
+        },
+        {
+          "ruleId": "pdf.tiny_font",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pdfplumber' passes hidden content to the model (Microscopic font); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_tiny_font.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pdfplumber"
+          }
+        },
+        {
+          "ruleId": "pdf.tiny_font",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pdfminer.six' passes hidden content to the model (Microscopic font); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_tiny_font.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pdfminer.six"
+          }
+        },
+        {
+          "ruleId": "pdf.tiny_font",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pdftotext' passes hidden content to the model (Microscopic font); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_tiny_font.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pdftotext"
+          }
+        },
+        {
+          "ruleId": "pdf.tiny_font",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (Microscopic font); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_tiny_font.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "pdf.render_mode_3",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pypdf' passes hidden content to the model (Invisible render mode); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_render_mode_3.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pypdf"
+          }
+        },
+        {
+          "ruleId": "pdf.render_mode_3",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pypdf+metadata' passes hidden content to the model (Invisible render mode); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_render_mode_3.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pypdf+metadata"
+          }
+        },
+        {
+          "ruleId": "pdf.render_mode_3",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pdfplumber' passes hidden content to the model (Invisible render mode); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_render_mode_3.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pdfplumber"
+          }
+        },
+        {
+          "ruleId": "pdf.render_mode_3",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pdfminer.six' passes hidden content to the model (Invisible render mode); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_render_mode_3.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pdfminer.six"
+          }
+        },
+        {
+          "ruleId": "pdf.render_mode_3",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pdftotext' passes hidden content to the model (Invisible render mode); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_render_mode_3.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pdftotext"
+          }
+        },
+        {
+          "ruleId": "pdf.render_mode_3",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (Invisible render mode); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_render_mode_3.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "pdf.off_page",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pypdf' passes hidden content to the model (Off-page coordinates); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_off_page.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pypdf"
+          }
+        },
+        {
+          "ruleId": "pdf.off_page",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pypdf+metadata' passes hidden content to the model (Off-page coordinates); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_off_page.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pypdf+metadata"
+          }
+        },
+        {
+          "ruleId": "pdf.off_page",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pdfplumber' passes hidden content to the model (Off-page coordinates); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_off_page.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pdfplumber"
+          }
+        },
+        {
+          "ruleId": "pdf.off_page",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pdfminer.six' passes hidden content to the model (Off-page coordinates); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_off_page.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pdfminer.six"
+          }
+        },
+        {
+          "ruleId": "pdf.off_page",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (Off-page coordinates); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_off_page.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "pdf.covered",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pypdf' passes hidden content to the model (Covered by shape); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_covered.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pypdf"
+          }
+        },
+        {
+          "ruleId": "pdf.covered",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pypdf+metadata' passes hidden content to the model (Covered by shape); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_covered.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pypdf+metadata"
+          }
+        },
+        {
+          "ruleId": "pdf.covered",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pdfplumber' passes hidden content to the model (Covered by shape); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_covered.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pdfplumber"
+          }
+        },
+        {
+          "ruleId": "pdf.covered",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pdfminer.six' passes hidden content to the model (Covered by shape); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_covered.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pdfminer.six"
+          }
+        },
+        {
+          "ruleId": "pdf.covered",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pdftotext' passes hidden content to the model (Covered by shape); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_covered.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pdftotext"
+          }
+        },
+        {
+          "ruleId": "pdf.covered",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (Covered by shape); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_covered.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "pdf.clipped",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pypdf' passes hidden content to the model (Clipped away); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_clipped.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pypdf"
+          }
+        },
+        {
+          "ruleId": "pdf.clipped",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pypdf+metadata' passes hidden content to the model (Clipped away); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_clipped.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pypdf+metadata"
+          }
+        },
+        {
+          "ruleId": "pdf.clipped",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pdfplumber' passes hidden content to the model (Clipped away); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_clipped.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pdfplumber"
+          }
+        },
+        {
+          "ruleId": "pdf.clipped",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pdfminer.six' passes hidden content to the model (Clipped away); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_clipped.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pdfminer.six"
+          }
+        },
+        {
+          "ruleId": "pdf.clipped",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pdftotext' passes hidden content to the model (Clipped away); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_clipped.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pdftotext"
+          }
+        },
+        {
+          "ruleId": "pdf.clipped",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (Clipped away); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_clipped.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "pdf.alpha_zero",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pypdf' passes hidden content to the model (Zero opacity); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_alpha_zero.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pypdf"
+          }
+        },
+        {
+          "ruleId": "pdf.alpha_zero",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pypdf+metadata' passes hidden content to the model (Zero opacity); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_alpha_zero.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pypdf+metadata"
+          }
+        },
+        {
+          "ruleId": "pdf.alpha_zero",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pdfplumber' passes hidden content to the model (Zero opacity); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_alpha_zero.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pdfplumber"
+          }
+        },
+        {
+          "ruleId": "pdf.alpha_zero",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pdfminer.six' passes hidden content to the model (Zero opacity); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_alpha_zero.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pdfminer.six"
+          }
+        },
+        {
+          "ruleId": "pdf.alpha_zero",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pdftotext' passes hidden content to the model (Zero opacity); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_alpha_zero.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pdftotext"
+          }
+        },
+        {
+          "ruleId": "pdf.alpha_zero",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (Zero opacity); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_alpha_zero.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "pdf.metadata",
+          "level": "error",
+          "message": {
+            "text": "Parser 'pypdf+metadata' passes hidden content to the model (Document metadata); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pdf_metadata.pdf"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "pypdf+metadata"
+          }
+        },
+        {
+          "ruleId": "docx.hidden_run",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (Hidden run (w:vanish)); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/docx_hidden_run.docx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "docx.hidden_run",
+          "level": "error",
+          "message": {
+            "text": "Parser 'python-docx' passes hidden content to the model (Hidden run (w:vanish)); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/docx_hidden_run.docx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "python-docx"
+          }
+        },
+        {
+          "ruleId": "docx.hidden_run",
+          "level": "error",
+          "message": {
+            "text": "Parser 'python-docx+metadata' passes hidden content to the model (Hidden run (w:vanish)); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/docx_hidden_run.docx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "python-docx+metadata"
+          }
+        },
+        {
+          "ruleId": "docx.hidden_run",
+          "level": "error",
+          "message": {
+            "text": "Parser 'libreoffice-txt' passes hidden content to the model (Hidden run (w:vanish)); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/docx_hidden_run.docx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "libreoffice-txt"
+          }
+        },
+        {
+          "ruleId": "docx.white_text",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (White text); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/docx_white_text.docx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "docx.white_text",
+          "level": "error",
+          "message": {
+            "text": "Parser 'python-docx' passes hidden content to the model (White text); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/docx_white_text.docx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "python-docx"
+          }
+        },
+        {
+          "ruleId": "docx.white_text",
+          "level": "error",
+          "message": {
+            "text": "Parser 'python-docx+metadata' passes hidden content to the model (White text); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/docx_white_text.docx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "python-docx+metadata"
+          }
+        },
+        {
+          "ruleId": "docx.white_text",
+          "level": "error",
+          "message": {
+            "text": "Parser 'libreoffice-txt' passes hidden content to the model (White text); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/docx_white_text.docx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "libreoffice-txt"
+          }
+        },
+        {
+          "ruleId": "docx.tiny_font",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (1pt font); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/docx_tiny_font.docx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "docx.tiny_font",
+          "level": "error",
+          "message": {
+            "text": "Parser 'python-docx' passes hidden content to the model (1pt font); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/docx_tiny_font.docx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "python-docx"
+          }
+        },
+        {
+          "ruleId": "docx.tiny_font",
+          "level": "error",
+          "message": {
+            "text": "Parser 'python-docx+metadata' passes hidden content to the model (1pt font); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/docx_tiny_font.docx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "python-docx+metadata"
+          }
+        },
+        {
+          "ruleId": "docx.tiny_font",
+          "level": "error",
+          "message": {
+            "text": "Parser 'libreoffice-txt' passes hidden content to the model (1pt font); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/docx_tiny_font.docx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "libreoffice-txt"
+          }
+        },
+        {
+          "ruleId": "docx.core_properties",
+          "level": "error",
+          "message": {
+            "text": "Parser 'python-docx+metadata' passes hidden content to the model (Core properties); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/docx_core_properties.docx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "python-docx+metadata"
+          }
+        },
+        {
+          "ruleId": "docx.unicode_tags",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (Unicode tag smuggling); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/docx_unicode_tags.docx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "docx.unicode_tags",
+          "level": "error",
+          "message": {
+            "text": "Parser 'python-docx' passes hidden content to the model (Unicode tag smuggling); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/docx_unicode_tags.docx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "python-docx"
+          }
+        },
+        {
+          "ruleId": "docx.unicode_tags",
+          "level": "error",
+          "message": {
+            "text": "Parser 'python-docx+metadata' passes hidden content to the model (Unicode tag smuggling); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/docx_unicode_tags.docx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "python-docx+metadata"
+          }
+        },
+        {
+          "ruleId": "docx.unicode_tags",
+          "level": "error",
+          "message": {
+            "text": "Parser 'libreoffice-txt' passes hidden content to the model (Unicode tag smuggling); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/docx_unicode_tags.docx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "libreoffice-txt"
+          }
+        },
+        {
+          "ruleId": "xlsx.hidden_sheet",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (Hidden worksheet); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/xlsx_hidden_sheet.xlsx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "xlsx.hidden_sheet",
+          "level": "error",
+          "message": {
+            "text": "Parser 'openpyxl (all cells)' passes hidden content to the model (Hidden worksheet); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/xlsx_hidden_sheet.xlsx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "openpyxl (all cells)"
+          }
+        },
+        {
+          "ruleId": "xlsx.very_hidden_sheet",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (Very hidden worksheet); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/xlsx_very_hidden_sheet.xlsx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "xlsx.very_hidden_sheet",
+          "level": "error",
+          "message": {
+            "text": "Parser 'openpyxl (all cells)' passes hidden content to the model (Very hidden worksheet); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/xlsx_very_hidden_sheet.xlsx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "openpyxl (all cells)"
+          }
+        },
+        {
+          "ruleId": "xlsx.hidden_row",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (Hidden row); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/xlsx_hidden_row.xlsx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "xlsx.hidden_row",
+          "level": "error",
+          "message": {
+            "text": "Parser 'openpyxl (all cells)' passes hidden content to the model (Hidden row); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/xlsx_hidden_row.xlsx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "openpyxl (all cells)"
+          }
+        },
+        {
+          "ruleId": "xlsx.hidden_column",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (Hidden column); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/xlsx_hidden_column.xlsx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "xlsx.hidden_column",
+          "level": "error",
+          "message": {
+            "text": "Parser 'openpyxl (all cells)' passes hidden content to the model (Hidden column); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/xlsx_hidden_column.xlsx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "openpyxl (all cells)"
+          }
+        },
+        {
+          "ruleId": "xlsx.white_text",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (White text); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/xlsx_white_text.xlsx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "xlsx.white_text",
+          "level": "error",
+          "message": {
+            "text": "Parser 'openpyxl (all cells)' passes hidden content to the model (White text); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/xlsx_white_text.xlsx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "openpyxl (all cells)"
+          }
+        },
+        {
+          "ruleId": "xlsx.white_text",
+          "level": "error",
+          "message": {
+            "text": "Parser 'openpyxl (visible only)' passes hidden content to the model (White text); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/xlsx_white_text.xlsx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "openpyxl (visible only)"
+          }
+        },
+        {
+          "ruleId": "xlsx.cell_comment",
+          "level": "error",
+          "message": {
+            "text": "Parser 'openpyxl (comments)' passes hidden content to the model (Cell comment); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/xlsx_cell_comment.xlsx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "openpyxl (comments)"
+          }
+        },
+        {
+          "ruleId": "pptx.speaker_notes",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (Speaker notes); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pptx_speaker_notes.pptx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "pptx.speaker_notes",
+          "level": "error",
+          "message": {
+            "text": "Parser 'python-pptx+notes' passes hidden content to the model (Speaker notes); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pptx_speaker_notes.pptx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "python-pptx+notes"
+          }
+        },
+        {
+          "ruleId": "pptx.off_slide",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (Off-slide shape); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pptx_off_slide.pptx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "pptx.off_slide",
+          "level": "error",
+          "message": {
+            "text": "Parser 'python-pptx' passes hidden content to the model (Off-slide shape); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pptx_off_slide.pptx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "python-pptx"
+          }
+        },
+        {
+          "ruleId": "pptx.off_slide",
+          "level": "error",
+          "message": {
+            "text": "Parser 'python-pptx+notes' passes hidden content to the model (Off-slide shape); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pptx_off_slide.pptx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "python-pptx+notes"
+          }
+        },
+        {
+          "ruleId": "pptx.white_text",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (White text); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pptx_white_text.pptx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "pptx.white_text",
+          "level": "error",
+          "message": {
+            "text": "Parser 'python-pptx' passes hidden content to the model (White text); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pptx_white_text.pptx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "python-pptx"
+          }
+        },
+        {
+          "ruleId": "pptx.white_text",
+          "level": "error",
+          "message": {
+            "text": "Parser 'python-pptx+notes' passes hidden content to the model (White text); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pptx_white_text.pptx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "python-pptx+notes"
+          }
+        },
+        {
+          "ruleId": "pptx.tiny_font",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (1pt font); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pptx_tiny_font.pptx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "pptx.tiny_font",
+          "level": "error",
+          "message": {
+            "text": "Parser 'python-pptx' passes hidden content to the model (1pt font); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pptx_tiny_font.pptx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "python-pptx"
+          }
+        },
+        {
+          "ruleId": "pptx.tiny_font",
+          "level": "error",
+          "message": {
+            "text": "Parser 'python-pptx+notes' passes hidden content to the model (1pt font); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pptx_tiny_font.pptx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "python-pptx+notes"
+          }
+        },
+        {
+          "ruleId": "pptx.hidden_shape",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (Hidden shape); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pptx_hidden_shape.pptx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "pptx.hidden_shape",
+          "level": "error",
+          "message": {
+            "text": "Parser 'python-pptx' passes hidden content to the model (Hidden shape); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pptx_hidden_shape.pptx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "python-pptx"
+          }
+        },
+        {
+          "ruleId": "pptx.hidden_shape",
+          "level": "error",
+          "message": {
+            "text": "Parser 'python-pptx+notes' passes hidden content to the model (Hidden shape); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pptx_hidden_shape.pptx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "python-pptx+notes"
+          }
+        },
+        {
+          "ruleId": "pptx.behind_shape",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (Covered by shape); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pptx_behind_shape.pptx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "pptx.behind_shape",
+          "level": "error",
+          "message": {
+            "text": "Parser 'python-pptx' passes hidden content to the model (Covered by shape); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pptx_behind_shape.pptx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "python-pptx"
+          }
+        },
+        {
+          "ruleId": "pptx.behind_shape",
+          "level": "error",
+          "message": {
+            "text": "Parser 'python-pptx+notes' passes hidden content to the model (Covered by shape); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/pptx_behind_shape.pptx"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "python-pptx+notes"
+          }
+        },
+        {
+          "ruleId": "html.display_none",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (display:none); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_display_none.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "html.display_none",
+          "level": "error",
+          "message": {
+            "text": "Parser 'bs4.get_text' passes hidden content to the model (display:none); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_display_none.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "bs4.get_text"
+          }
+        },
+        {
+          "ruleId": "html.display_none",
+          "level": "error",
+          "message": {
+            "text": "Parser 'bs4 (strip script/style)' passes hidden content to the model (display:none); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_display_none.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "bs4 (strip script/style)"
+          }
+        },
+        {
+          "ruleId": "html.display_none",
+          "level": "error",
+          "message": {
+            "text": "Parser 'raw-html' passes hidden content to the model (display:none); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_display_none.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "raw-html"
+          }
+        },
+        {
+          "ruleId": "html.font_size_zero",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (font-size:0); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_font_size_zero.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "html.font_size_zero",
+          "level": "error",
+          "message": {
+            "text": "Parser 'bs4.get_text' passes hidden content to the model (font-size:0); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_font_size_zero.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "bs4.get_text"
+          }
+        },
+        {
+          "ruleId": "html.font_size_zero",
+          "level": "error",
+          "message": {
+            "text": "Parser 'bs4 (strip script/style)' passes hidden content to the model (font-size:0); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_font_size_zero.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "bs4 (strip script/style)"
+          }
+        },
+        {
+          "ruleId": "html.font_size_zero",
+          "level": "error",
+          "message": {
+            "text": "Parser 'raw-html' passes hidden content to the model (font-size:0); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_font_size_zero.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "raw-html"
+          }
+        },
+        {
+          "ruleId": "html.color_match",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (Colour-matched text); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_color_match.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "html.color_match",
+          "level": "error",
+          "message": {
+            "text": "Parser 'bs4.get_text' passes hidden content to the model (Colour-matched text); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_color_match.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "bs4.get_text"
+          }
+        },
+        {
+          "ruleId": "html.color_match",
+          "level": "error",
+          "message": {
+            "text": "Parser 'bs4 (strip script/style)' passes hidden content to the model (Colour-matched text); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_color_match.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "bs4 (strip script/style)"
+          }
+        },
+        {
+          "ruleId": "html.color_match",
+          "level": "error",
+          "message": {
+            "text": "Parser 'raw-html' passes hidden content to the model (Colour-matched text); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_color_match.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "raw-html"
+          }
+        },
+        {
+          "ruleId": "html.offscreen",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (Off-screen positioning); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_offscreen.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "html.offscreen",
+          "level": "error",
+          "message": {
+            "text": "Parser 'bs4.get_text' passes hidden content to the model (Off-screen positioning); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_offscreen.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "bs4.get_text"
+          }
+        },
+        {
+          "ruleId": "html.offscreen",
+          "level": "error",
+          "message": {
+            "text": "Parser 'bs4 (strip script/style)' passes hidden content to the model (Off-screen positioning); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_offscreen.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "bs4 (strip script/style)"
+          }
+        },
+        {
+          "ruleId": "html.offscreen",
+          "level": "error",
+          "message": {
+            "text": "Parser 'raw-html' passes hidden content to the model (Off-screen positioning); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_offscreen.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "raw-html"
+          }
+        },
+        {
+          "ruleId": "html.comment",
+          "level": "error",
+          "message": {
+            "text": "Parser 'raw-html' passes hidden content to the model (HTML comment); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_comment.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "raw-html"
+          }
+        },
+        {
+          "ruleId": "html.img_alt",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (Image alt text); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_img_alt.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "html.img_alt",
+          "level": "error",
+          "message": {
+            "text": "Parser 'raw-html' passes hidden content to the model (Image alt text); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_img_alt.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "raw-html"
+          }
+        },
+        {
+          "ruleId": "html.aria_label",
+          "level": "error",
+          "message": {
+            "text": "Parser 'raw-html' passes hidden content to the model (aria-label attribute); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_aria_label.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "raw-html"
+          }
+        },
+        {
+          "ruleId": "html.unicode_tags",
+          "level": "error",
+          "message": {
+            "text": "Parser 'markitdown' passes hidden content to the model (Unicode tag smuggling); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_unicode_tags.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "markitdown"
+          }
+        },
+        {
+          "ruleId": "html.unicode_tags",
+          "level": "error",
+          "message": {
+            "text": "Parser 'bs4.get_text' passes hidden content to the model (Unicode tag smuggling); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_unicode_tags.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "bs4.get_text"
+          }
+        },
+        {
+          "ruleId": "html.unicode_tags",
+          "level": "error",
+          "message": {
+            "text": "Parser 'bs4 (strip script/style)' passes hidden content to the model (Unicode tag smuggling); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_unicode_tags.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "bs4 (strip script/style)"
+          }
+        },
+        {
+          "ruleId": "html.unicode_tags",
+          "level": "error",
+          "message": {
+            "text": "Parser 'raw-html' passes hidden content to the model (Unicode tag smuggling); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/html_unicode_tags.html"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "raw-html"
+          }
+        },
+        {
+          "ruleId": "eml.plain_html_mismatch",
+          "level": "error",
+          "message": {
+            "text": "Parser 'email (plain preferred)' passes hidden content to the model (text/plain vs text/html mismatch); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/eml_plain_html_mismatch.eml"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "email (plain preferred)"
+          }
+        },
+        {
+          "ruleId": "eml.plain_html_mismatch",
+          "level": "error",
+          "message": {
+            "text": "Parser 'email (all parts+headers)' passes hidden content to the model (text/plain vs text/html mismatch); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/eml_plain_html_mismatch.eml"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "email (all parts+headers)"
+          }
+        },
+        {
+          "ruleId": "eml.html_display_none",
+          "level": "error",
+          "message": {
+            "text": "Parser 'email (plain preferred)' passes hidden content to the model (Hidden HTML in email); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/eml_html_display_none.eml"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "email (plain preferred)"
+          }
+        },
+        {
+          "ruleId": "eml.html_display_none",
+          "level": "error",
+          "message": {
+            "text": "Parser 'email (html preferred)' passes hidden content to the model (Hidden HTML in email); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/eml_html_display_none.eml"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "email (html preferred)"
+          }
+        },
+        {
+          "ruleId": "eml.html_display_none",
+          "level": "error",
+          "message": {
+            "text": "Parser 'email (all parts+headers)' passes hidden content to the model (Hidden HTML in email); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/eml_html_display_none.eml"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "email (all parts+headers)"
+          }
+        },
+        {
+          "ruleId": "eml.custom_header",
+          "level": "error",
+          "message": {
+            "text": "Parser 'email (all parts+headers)' passes hidden content to the model (Custom X- header); the rendered page does not show it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/sample-run/eml_custom_header.eml"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "parser": "email (all parts+headers)"
+          }
+        }
+      ]
+    }
+  ]
+}

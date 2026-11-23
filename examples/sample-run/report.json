@@ -1,0 +1,755 @@
+{
+  "tool": "doubletake",
+  "canary": "DTKKAMVHAKN",
+  "parsers": [
+    "pypdf",
+    "pypdf+metadata",
+    "pdfplumber",
+    "pdfminer.six",
+    "pdftotext",
+    "markitdown",
+    "python-docx",
+    "python-docx+metadata",
+    "libreoffice-txt",
+    "openpyxl (all cells)",
+    "openpyxl (visible only)",
+    "openpyxl (comments)",
+    "python-pptx",
+    "python-pptx+notes",
+    "bs4.get_text",
+    "bs4 (strip script/style)",
+    "raw-html",
+    "email (plain preferred)",
+    "email (html preferred)",
+    "email (all parts+headers)"
+  ],
+  "llm_model": null,
+  "summary": {
+    "techniques": 37,
+    "split_view_techniques": 37,
+    "leaks": 118,
+    "llm_influenced": 0,
+    "parser_scores": {
+      "pypdf": {
+        "tested": 9,
+        "leaked": 7
+      },
+      "pypdf+metadata": {
+        "tested": 9,
+        "leaked": 8
+      },
+      "pdfplumber": {
+        "tested": 9,
+        "leaked": 7
+      },
+      "pdfminer.six": {
+        "tested": 9,
+        "leaked": 7
+      },
+      "pdftotext": {
+        "tested": 9,
+        "leaked": 6
+      },
+      "markitdown": {
+        "tested": 34,
+        "leaked": 28
+      },
+      "python-docx": {
+        "tested": 5,
+        "leaked": 4
+      },
+      "python-docx+metadata": {
+        "tested": 5,
+        "leaked": 5
+      },
+      "libreoffice-txt": {
+        "tested": 5,
+        "leaked": 4
+      },
+      "openpyxl (all cells)": {
+        "tested": 6,
+        "leaked": 5
+      },
+      "openpyxl (visible only)": {
+        "tested": 6,
+        "leaked": 1
+      },
+      "openpyxl (comments)": {
+        "tested": 6,
+        "leaked": 1
+      },
+      "python-pptx": {
+        "tested": 6,
+        "leaked": 5
+      },
+      "python-pptx+notes": {
+        "tested": 6,
+        "leaked": 6
+      },
+      "bs4.get_text": {
+        "tested": 8,
+        "leaked": 5
+      },
+      "bs4 (strip script/style)": {
+        "tested": 8,
+        "leaked": 5
+      },
+      "raw-html": {
+        "tested": 8,
+        "leaked": 8
+      },
+      "email (plain preferred)": {
+        "tested": 3,
+        "leaked": 2
+      },
+      "email (html preferred)": {
+        "tested": 3,
+        "leaked": 1
+      },
+      "email (all parts+headers)": {
+        "tested": 3,
+        "leaked": 3
+      }
+    }
+  },
+  "results": [
+    {
+      "technique": "pdf.white_text",
+      "fmt": "pdf",
+      "name": "White-on-white text",
+      "document": "examples/sample-run/pdf_white_text.pdf",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "pypdf": "LEAK",
+        "pypdf+metadata": "LEAK",
+        "pdfplumber": "LEAK",
+        "pdfminer.six": "LEAK",
+        "pdftotext": "LEAK",
+        "markitdown": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "pdf.tiny_font",
+      "fmt": "pdf",
+      "name": "Microscopic font",
+      "document": "examples/sample-run/pdf_tiny_font.pdf",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "pypdf": "LEAK",
+        "pypdf+metadata": "LEAK",
+        "pdfplumber": "LEAK",
+        "pdfminer.six": "LEAK",
+        "pdftotext": "LEAK",
+        "markitdown": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "pdf.render_mode_3",
+      "fmt": "pdf",
+      "name": "Invisible render mode",
+      "document": "examples/sample-run/pdf_render_mode_3.pdf",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "pypdf": "LEAK",
+        "pypdf+metadata": "LEAK",
+        "pdfplumber": "LEAK",
+        "pdfminer.six": "LEAK",
+        "pdftotext": "LEAK",
+        "markitdown": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "pdf.off_page",
+      "fmt": "pdf",
+      "name": "Off-page coordinates",
+      "document": "examples/sample-run/pdf_off_page.pdf",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "pypdf": "LEAK",
+        "pypdf+metadata": "LEAK",
+        "pdfplumber": "LEAK",
+        "pdfminer.six": "LEAK",
+        "pdftotext": "safe",
+        "markitdown": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "pdf.covered",
+      "fmt": "pdf",
+      "name": "Covered by shape",
+      "document": "examples/sample-run/pdf_covered.pdf",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "pypdf": "LEAK",
+        "pypdf+metadata": "LEAK",
+        "pdfplumber": "LEAK",
+        "pdfminer.six": "LEAK",
+        "pdftotext": "LEAK",
+        "markitdown": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "pdf.clipped",
+      "fmt": "pdf",
+      "name": "Clipped away",
+      "document": "examples/sample-run/pdf_clipped.pdf",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "pypdf": "LEAK",
+        "pypdf+metadata": "LEAK",
+        "pdfplumber": "LEAK",
+        "pdfminer.six": "LEAK",
+        "pdftotext": "LEAK",
+        "markitdown": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "pdf.alpha_zero",
+      "fmt": "pdf",
+      "name": "Zero opacity",
+      "document": "examples/sample-run/pdf_alpha_zero.pdf",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "pypdf": "LEAK",
+        "pypdf+metadata": "LEAK",
+        "pdfplumber": "LEAK",
+        "pdfminer.six": "LEAK",
+        "pdftotext": "LEAK",
+        "markitdown": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "pdf.metadata",
+      "fmt": "pdf",
+      "name": "Document metadata",
+      "document": "examples/sample-run/pdf_metadata.pdf",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "pypdf": "safe",
+        "pypdf+metadata": "LEAK",
+        "pdfplumber": "safe",
+        "pdfminer.six": "safe",
+        "pdftotext": "safe",
+        "markitdown": "safe"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "pdf.annotation",
+      "fmt": "pdf",
+      "name": "Zero-size annotation",
+      "document": "examples/sample-run/pdf_annotation.pdf",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "pypdf": "safe",
+        "pypdf+metadata": "safe",
+        "pdfplumber": "safe",
+        "pdfminer.six": "safe",
+        "pdftotext": "safe",
+        "markitdown": "safe"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "docx.hidden_run",
+      "fmt": "docx",
+      "name": "Hidden run (w:vanish)",
+      "document": "examples/sample-run/docx_hidden_run.docx",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "LEAK",
+        "python-docx": "LEAK",
+        "python-docx+metadata": "LEAK",
+        "libreoffice-txt": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "docx.white_text",
+      "fmt": "docx",
+      "name": "White text",
+      "document": "examples/sample-run/docx_white_text.docx",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "LEAK",
+        "python-docx": "LEAK",
+        "python-docx+metadata": "LEAK",
+        "libreoffice-txt": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "docx.tiny_font",
+      "fmt": "docx",
+      "name": "1pt font",
+      "document": "examples/sample-run/docx_tiny_font.docx",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "LEAK",
+        "python-docx": "LEAK",
+        "python-docx+metadata": "LEAK",
+        "libreoffice-txt": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "docx.core_properties",
+      "fmt": "docx",
+      "name": "Core properties",
+      "document": "examples/sample-run/docx_core_properties.docx",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "safe",
+        "python-docx": "safe",
+        "python-docx+metadata": "LEAK",
+        "libreoffice-txt": "safe"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "docx.unicode_tags",
+      "fmt": "docx",
+      "name": "Unicode tag smuggling",
+      "document": "examples/sample-run/docx_unicode_tags.docx",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "LEAK",
+        "python-docx": "LEAK",
+        "python-docx+metadata": "LEAK",
+        "libreoffice-txt": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "xlsx.hidden_sheet",
+      "fmt": "xlsx",
+      "name": "Hidden worksheet",
+      "document": "examples/sample-run/xlsx_hidden_sheet.xlsx",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "LEAK",
+        "openpyxl (all cells)": "LEAK",
+        "openpyxl (visible only)": "safe",
+        "openpyxl (comments)": "safe"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "xlsx.very_hidden_sheet",
+      "fmt": "xlsx",
+      "name": "Very hidden worksheet",
+      "document": "examples/sample-run/xlsx_very_hidden_sheet.xlsx",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "LEAK",
+        "openpyxl (all cells)": "LEAK",
+        "openpyxl (visible only)": "safe",
+        "openpyxl (comments)": "safe"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "xlsx.hidden_row",
+      "fmt": "xlsx",
+      "name": "Hidden row",
+      "document": "examples/sample-run/xlsx_hidden_row.xlsx",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "LEAK",
+        "openpyxl (all cells)": "LEAK",
+        "openpyxl (visible only)": "safe",
+        "openpyxl (comments)": "safe"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "xlsx.hidden_column",
+      "fmt": "xlsx",
+      "name": "Hidden column",
+      "document": "examples/sample-run/xlsx_hidden_column.xlsx",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "LEAK",
+        "openpyxl (all cells)": "LEAK",
+        "openpyxl (visible only)": "safe",
+        "openpyxl (comments)": "safe"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "xlsx.white_text",
+      "fmt": "xlsx",
+      "name": "White text",
+      "document": "examples/sample-run/xlsx_white_text.xlsx",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "LEAK",
+        "openpyxl (all cells)": "LEAK",
+        "openpyxl (visible only)": "LEAK",
+        "openpyxl (comments)": "safe"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "xlsx.cell_comment",
+      "fmt": "xlsx",
+      "name": "Cell comment",
+      "document": "examples/sample-run/xlsx_cell_comment.xlsx",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "safe",
+        "openpyxl (all cells)": "safe",
+        "openpyxl (visible only)": "safe",
+        "openpyxl (comments)": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "pptx.speaker_notes",
+      "fmt": "pptx",
+      "name": "Speaker notes",
+      "document": "examples/sample-run/pptx_speaker_notes.pptx",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "LEAK",
+        "python-pptx": "safe",
+        "python-pptx+notes": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "pptx.off_slide",
+      "fmt": "pptx",
+      "name": "Off-slide shape",
+      "document": "examples/sample-run/pptx_off_slide.pptx",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "LEAK",
+        "python-pptx": "LEAK",
+        "python-pptx+notes": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "pptx.white_text",
+      "fmt": "pptx",
+      "name": "White text",
+      "document": "examples/sample-run/pptx_white_text.pptx",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "LEAK",
+        "python-pptx": "LEAK",
+        "python-pptx+notes": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "pptx.tiny_font",
+      "fmt": "pptx",
+      "name": "1pt font",
+      "document": "examples/sample-run/pptx_tiny_font.pptx",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "LEAK",
+        "python-pptx": "LEAK",
+        "python-pptx+notes": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "pptx.hidden_shape",
+      "fmt": "pptx",
+      "name": "Hidden shape",
+      "document": "examples/sample-run/pptx_hidden_shape.pptx",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "LEAK",
+        "python-pptx": "LEAK",
+        "python-pptx+notes": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "pptx.behind_shape",
+      "fmt": "pptx",
+      "name": "Covered by shape",
+      "document": "examples/sample-run/pptx_behind_shape.pptx",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "LEAK",
+        "python-pptx": "LEAK",
+        "python-pptx+notes": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "html.display_none",
+      "fmt": "html",
+      "name": "display:none",
+      "document": "examples/sample-run/html_display_none.html",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "LEAK",
+        "bs4.get_text": "LEAK",
+        "bs4 (strip script/style)": "LEAK",
+        "raw-html": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "html.font_size_zero",
+      "fmt": "html",
+      "name": "font-size:0",
+      "document": "examples/sample-run/html_font_size_zero.html",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "LEAK",
+        "bs4.get_text": "LEAK",
+        "bs4 (strip script/style)": "LEAK",
+        "raw-html": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "html.color_match",
+      "fmt": "html",
+      "name": "Colour-matched text",
+      "document": "examples/sample-run/html_color_match.html",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "LEAK",
+        "bs4.get_text": "LEAK",
+        "bs4 (strip script/style)": "LEAK",
+        "raw-html": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "html.offscreen",
+      "fmt": "html",
+      "name": "Off-screen positioning",
+      "document": "examples/sample-run/html_offscreen.html",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "LEAK",
+        "bs4.get_text": "LEAK",
+        "bs4 (strip script/style)": "LEAK",
+        "raw-html": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "html.comment",
+      "fmt": "html",
+      "name": "HTML comment",
+      "document": "examples/sample-run/html_comment.html",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "safe",
+        "bs4.get_text": "safe",
+        "bs4 (strip script/style)": "safe",
+        "raw-html": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "html.img_alt",
+      "fmt": "html",
+      "name": "Image alt text",
+      "document": "examples/sample-run/html_img_alt.html",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "LEAK",
+        "bs4.get_text": "safe",
+        "bs4 (strip script/style)": "safe",
+        "raw-html": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "html.aria_label",
+      "fmt": "html",
+      "name": "aria-label attribute",
+      "document": "examples/sample-run/html_aria_label.html",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "safe",
+        "bs4.get_text": "safe",
+        "bs4 (strip script/style)": "safe",
+        "raw-html": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "html.unicode_tags",
+      "fmt": "html",
+      "name": "Unicode tag smuggling",
+      "document": "examples/sample-run/html_unicode_tags.html",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "markitdown": "LEAK",
+        "bs4.get_text": "LEAK",
+        "bs4 (strip script/style)": "LEAK",
+        "raw-html": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "eml.plain_html_mismatch",
+      "fmt": "eml",
+      "name": "text/plain vs text/html mismatch",
+      "document": "examples/sample-run/eml_plain_html_mismatch.eml",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "email (plain preferred)": "LEAK",
+        "email (html preferred)": "safe",
+        "email (all parts+headers)": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "eml.html_display_none",
+      "fmt": "eml",
+      "name": "Hidden HTML in email",
+      "document": "examples/sample-run/eml_html_display_none.eml",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "email (plain preferred)": "LEAK",
+        "email (html preferred)": "LEAK",
+        "email (all parts+headers)": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    },
+    {
+      "technique": "eml.custom_header",
+      "fmt": "eml",
+      "name": "Custom X- header",
+      "document": "examples/sample-run/eml_custom_header.eml",
+      "human_sees_payload": false,
+      "render_error": "",
+      "cells": {
+        "email (plain preferred)": "safe",
+        "email (html preferred)": "safe",
+        "email (all parts+headers)": "LEAK"
+      },
+      "errors": {},
+      "llm": {},
+      "split_view": true
+    }
+  ]
+}
