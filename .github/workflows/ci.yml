@@ -23,3 +23,30 @@ jobs:
       - run: pip install -e ".[parsers,dev]"
       - run: doubletake selftest
       - run: pytest -q
+
+  action:
+    # Exercise the published composite action exactly as users call it.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Leaky parser must fail the action
+        id: leaky
+        continue-on-error: true
+        uses: ./
+        with:
+          formats: pdf
+          only: pypdf
+      - name: Assert it failed and counted leaks
+        run: |
+          test "${{ steps.leaky.outcome }}" = "failure"
+          test "${{ steps.leaky.outputs.leaks }}" -gt 0
+      - name: Non-leaking technique must pass
+        uses: ./
+        with:
+          formats: pdf
+          only: pypdf
+          techniques: pdf.annotation
+          install-system-deps: "false"

@@ -1,10 +1,16 @@
-# DoubleTake
+<h1 align="center">DoubleTake</h1>
 
-**Find where your document pipeline shows the LLM something the human never saw.**
+<p align="center"><b>Find where your document pipeline shows the LLM something the human never saw.</b></p>
 
-[![ci](https://github.com/Aadithya-kl/doubletake/actions/workflows/ci.yml/badge.svg)](https://github.com/Aadithya-kl/doubletake/actions/workflows/ci.yml)
-![python](https://img.shields.io/badge/python-3.10%2B-blue)
-![license](https://img.shields.io/badge/license-MIT-green)
+<p align="center">
+  <a href="https://github.com/Aadithya-kl/doubletake/actions/workflows/ci.yml"><img alt="ci" src="https://github.com/Aadithya-kl/doubletake/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://pypi.org/project/doubletake-ai/"><img alt="pypi" src="https://img.shields.io/pypi/v/doubletake-ai"></a>
+  <img alt="python" src="https://img.shields.io/badge/python-3.10%2B-blue">
+  <img alt="license" src="https://img.shields.io/badge/license-MIT-green">
+  <a href="https://github.com/Aadithya-kl/doubletake/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22"><img alt="good first issues" src="https://img.shields.io/github/issues/Aadithya-kl/doubletake/good%20first%20issue?label=good%20first%20issues&color=7057ff"></a>
+</p>
+
+<p align="center"><img src="assets/hero.png" alt="The same PDF: the rendered page shows an ordinary invoice; pypdf's output also contains a hidden instruction to the AI" width="900"></p>
 
 Resume screeners, invoice agents, email assistants, RAG chatbots and "chat with your PDF" features all
 have an ingestion step: a parser turns a PDF, Word file, spreadsheet, slide deck, web page or email into
@@ -17,6 +23,11 @@ says something its HTML part does not, and so on.
 DoubleTake red-teams that gap **in your own stack**. It forges "two-faced" documents, runs them through
 your parsers, renders them like a human would see them, and tells you exactly which parser leaks which trick.
 Optionally, it asks a real LLM whether the hidden text actually changes its answer.
+
+```bash
+pip install "doubletake-ai[parsers]"
+doubletake selftest && doubletake probe
+```
 
 ```
 $ doubletake probe
@@ -99,10 +110,12 @@ sudo apt-get install tesseract-ocr poppler-utils \
 # macOS
 brew install tesseract poppler && brew install --cask libreoffice google-chrome
 
-# DoubleTake itself
-git clone https://github.com/Aadithya-kl/doubletake.git
-cd doubletake
-pip install -e ".[parsers]"      # [parsers] adds pdfplumber, pdfminer.six and markitdown to test against
+# DoubleTake itself (the PyPI name is doubletake-ai; the command and import are `doubletake`)
+pip install "doubletake-ai[parsers]"     # [parsers] adds pdfplumber, pdfminer.six and markitdown to test against
+# straight from GitHub (works before the PyPI release, too)
+pip install "doubletake-ai[parsers] @ git+https://github.com/Aadithya-kl/doubletake.git"
+# or from source
+git clone https://github.com/Aadithya-kl/doubletake.git && cd doubletake && pip install -e ".[parsers]"
 
 doubletake selftest              # confirm rendering + OCR work on this machine
 ```
@@ -194,6 +207,9 @@ to the endpoint you choose. Details: [docs/llm-mode.md](docs/llm-mode.md).
 
 ## CI and GitHub code scanning
 
+Use the GitHub Action. It installs the system tools, runs `selftest`, writes a job summary and SARIF, and
+fails the job on leaks:
+
 ```yaml
 # .github/workflows/doubletake.yml
 name: doubletake
@@ -206,15 +222,18 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
-      - run: sudo apt-get update && sudo apt-get install -y tesseract-ocr poppler-utils
-      - run: pip install "git+https://github.com/Aadithya-kl/doubletake.git" && pip install -e .
-      - run: doubletake probe --format pdf --parser-py "myapp.ingest:load_text" --only pypdf --sarif dt.sarif --fail-on-leak
+      - run: pip install -e .                       # your app, so DoubleTake can import your loader
+      - uses: Aadithya-kl/doubletake@v0.2.1
+        with:
+          formats: pdf docx
+          parser-py: myapp.ingest:load_text
       - uses: github/codeql-action/upload-sarif@v3
         if: always()
-        with: { sarif_file: dt.sarif }
+        with: { sarif_file: doubletake.sarif }
 ```
 
-More in [docs/ci.md](docs/ci.md).
+Inputs: `formats`, `parser-py`, `parser-cmd`, `only`, `techniques`, `fail-on-leak`, `sarif`, `output-dir`,
+`install-system-deps`. Outputs: `leaks`, `report`. More in [docs/ci.md](docs/ci.md).
 
 ## Techniques
 
@@ -300,6 +319,21 @@ bring-your-own-parser tool with a verified human-view oracle, rather than a fixe
 | [docs/ci.md](docs/ci.md) | CI gating, SARIF, scanning uploads in production |
 | [docs/mitigations.md](docs/mitigations.md) | How to fix a leaking pipeline |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Adding techniques and parsers, running tests |
+
+## Contributing
+
+DoubleTake gets better with every hiding trick and every parser someone tests. Good ways to start:
+
+- **Add a technique.** Each one is a short function plus a registry entry, and the test suite tells you whether it really hides the text. See [good first issues](https://github.com/Aadithya-kl/doubletake/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
+- **Test a loader you use** (LangChain, LlamaIndex, Docling, Unstructured, Tika, a cloud OCR service) and
+  [share the result](https://github.com/Aadithya-kl/doubletake/issues/new?template=parser-result.yml).
+- **Add a format**: RTF, ODT, EPUB, SVG, Markdown, CSV.
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md). If DoubleTake found something in your pipeline, a star helps other people find it too.
+
+## Citing
+
+See [CITATION.cff](CITATION.cff), or use GitHub's "Cite this repository" button.
 
 ## Responsible use
 

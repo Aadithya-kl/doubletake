@@ -1,0 +1,36 @@
+name: New hiding technique
+description: Propose a way to hide text from humans but not from parsers
+labels: ["technique", "enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! A technique is accepted when the payload is **invisible in a real renderer** and **at least one common parser** returns it.
+        See [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md#adding-a-technique). Most techniques take under an hour to add.
+  - type: dropdown
+    id: format
+    attributes:
+      label: Format
+      options: [pdf, docx, xlsx, pptx, html, eml, "new format (explain below)"]
+    validations: { required: true }
+  - type: textarea
+    id: how
+    attributes:
+      label: How the text is hidden
+      description: What makes it invisible when rendered?
+    validations: { required: true }
+  - type: textarea
+    id: parsers
+    attributes:
+      label: Which parsers do you expect to leak it?
+  - type: textarea
+    id: refs
+    attributes:
+      label: References
+      description: Papers, blog posts, CVEs, in-the-wild examples.
+  - type: checkboxes
+    id: pr
+    attributes:
+      label: Contribution
+      options:
+        - label: I would like to implement this myself

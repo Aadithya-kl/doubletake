@@ -1,6 +1,24 @@
 # CI and production use
 
-## Gate pull requests on your ingestion code
+## The GitHub Action (recommended)
+
+```yaml
+- uses: Aadithya-kl/doubletake@v0.2.1
+  with:
+    formats: pdf docx            # space-separated; empty = all six formats
+    parser-py: myapp.ingest:load_text
+    # parser-cmd: "ingest=python -m myapp.ingest {file}"
+    # only: pypdf                # built-in baselines to compare against
+    # techniques: pdf.white_text pdf.off_page
+    # fail-on-leak: "true"
+    # sarif: doubletake.sarif
+```
+
+It installs tesseract, poppler and only the LibreOffice parts your formats need, runs `doubletake selftest`,
+writes the Markdown report to the job summary, and exposes `steps.<id>.outputs.leaks`. Chrome (for HTML and
+EML) is preinstalled on GitHub's Ubuntu runners.
+
+## Gate pull requests with the CLI
 
 `probe --fail-on-leak` exits 1 if any parser leaks a confirmed split-view payload. Point it at the loader
 your product actually uses and only the formats you accept:
@@ -20,7 +38,7 @@ jobs:
         with: { python-version: "3.12" }
       - name: System tools for the human view
         run: sudo apt-get update && sudo apt-get install -y tesseract-ocr poppler-utils libreoffice-writer
-      - run: pip install "git+https://github.com/Aadithya-kl/doubletake.git" && pip install -e .
+      - run: pip install "doubletake-ai[parsers]" && pip install -e .
       - run: doubletake selftest
       - run: >
           doubletake probe -q --format pdf --format docx

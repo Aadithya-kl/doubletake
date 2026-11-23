@@ -3,8 +3,8 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "doubletake"
-version = "0.2.0"
+name = "doubletake-ai"
+version = "0.2.1"
 description = "Split-view red teaming for LLM document ingestion: find where your parser shows the model something the human never saw."
 authors = [{ name = "Aadithya-kl" }]
 keywords = ["llm", "security", "red-team", "prompt-injection", "rag", "pdf", "document-parsing"]

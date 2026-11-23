@@ -1,0 +1,25 @@
+name: Bug report
+description: Something does not work as documented
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+    validations: { required: true }
+  - type: textarea
+    id: repro
+    attributes:
+      label: Command and output
+      render: shell
+    validations: { required: true }
+  - type: textarea
+    id: selftest
+    attributes:
+      label: Output of `doubletake selftest`
+      render: shell
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      placeholder: "OS, Python version, doubletake --version, tesseract --version"

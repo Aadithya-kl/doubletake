@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1 (2026-11-23)
+
+- **GitHub Action**: `uses: Aadithya-kl/doubletake@v0.2.1`, with job summary, SARIF, a `leaks` output and installation of only the system packages your formats need.
+- Published on PyPI as **`doubletake-ai`** (the `doubletake` name belongs to an unrelated project). The command and import name stay `doubletake`.
+- Release workflow with PyPI trusted publishing.
+- Hero image, social preview, issue and PR templates, code of conduct, citation file.
+
 ## 0.2.0 (2026-11-23)
 
 - New carriers: **XLSX** (hidden and very-hidden sheets, hidden rows and columns, white text, cell comments),

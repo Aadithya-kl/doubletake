@@ -282,4 +282,4 @@ def test_cli_forge_selftest_and_listing(tmp_path):
     assert cli("selftest").returncode == 0
     assert "pdf.white_text" in cli("techniques").stdout
     assert "pypdf" in cli("parsers").stdout
-    assert cli("--version").stdout.strip().endswith("0.2.0")
+    assert cli("--version").stdout.strip().endswith("0.2.1")

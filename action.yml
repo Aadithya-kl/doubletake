@@ -1,0 +1,109 @@
+name: "DoubleTake split-view check"
+description: "Fail CI when your document parser passes the LLM text that the rendered page does not show."
+author: "Aadithya-kl"
+branding:
+  icon: "eye-off"
+  color: "red"
+
+inputs:
+  formats:
+    description: "Space-separated formats to test: pdf docx xlsx pptx html eml. Empty = all."
+    required: false
+    default: "pdf"
+  parser-py:
+    description: "Your parser as MODULE:FUNC (f(path: str) -> str). Optional."
+    required: false
+    default: ""
+  parser-cmd:
+    description: "Your parser as NAME=COMMAND printing text to stdout ({file} = path). Optional."
+    required: false
+    default: ""
+  only:
+    description: "Space-separated built-in parsers to include (see `doubletake parsers`). Empty = all installed."
+    required: false
+    default: ""
+  techniques:
+    description: "Space-separated technique ids to test. Empty = all for the chosen formats."
+    required: false
+    default: ""
+  fail-on-leak:
+    description: "Fail the job when any parser leaks a hidden payload."
+    required: false
+    default: "true"
+  sarif:
+    description: "Path for the SARIF report (upload it with github/codeql-action/upload-sarif)."
+    required: false
+    default: "doubletake.sarif"
+  output-dir:
+    description: "Folder for the Markdown/JSON report and forged documents."
+    required: false
+    default: "doubletake-out"
+  install-system-deps:
+    description: "apt-get install tesseract, poppler and the LibreOffice parts the chosen formats need (Ubuntu runners)."
+    required: false
+    default: "true"
+
+outputs:
+  leaks:
+    description: "Number of split-view leaks found."
+    value: ${{ steps.probe.outputs.leaks }}
+  report:
+    description: "Path to the Markdown report."
+    value: ${{ steps.probe.outputs.report }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install system tools
+      if: inputs.install-system-deps == 'true'
+      shell: bash
+      env:
+        FORMATS: ${{ inputs.formats }}
+      run: |
+        pkgs="tesseract-ocr poppler-utils"
+        all=$([ -z "$FORMATS" ] && echo 1 || echo 0)
+        [[ $all == 1 || " $FORMATS " == *" docx "* ]] && pkgs="$pkgs libreoffice-writer"
+        [[ $all == 1 || " $FORMATS " == *" xlsx "* ]] && pkgs="$pkgs libreoffice-calc"
+        [[ $all == 1 || " $FORMATS " == *" pptx "* ]] && pkgs="$pkgs libreoffice-impress"
+        sudo apt-get update -qq && sudo apt-get install -y -qq $pkgs > /dev/null
+
+    - name: Install DoubleTake
+      shell: bash
+      run: python -m pip install -q "${{ github.action_path }}[parsers]"
+
+    - name: Self-test the human view
+      shell: bash
+      run: doubletake selftest
+
+    - name: Probe
+      id: probe
+      shell: bash
+      env:
+        FORMATS: ${{ inputs.formats }}
+        PARSER_PY: ${{ inputs.parser-py }}
+        PARSER_CMD: ${{ inputs.parser-cmd }}
+        ONLY: ${{ inputs.only }}
+        TECHNIQUES: ${{ inputs.techniques }}
+        FAIL: ${{ inputs.fail-on-leak }}
+        SARIF: ${{ inputs.sarif }}
+        OUT: ${{ inputs.output-dir }}
+      run: |
+        args=(probe -q -o "$OUT" --sarif "$SARIF")
+        for f in $FORMATS; do args+=(--format "$f"); done
+        for o in $ONLY; do args+=(--only "$o"); done
+        for t in $TECHNIQUES; do args+=(--technique "$t"); done
+        [ -n "$PARSER_PY" ] && args+=(--parser-py "$PARSER_PY")
+        [ -n "$PARSER_CMD" ] && args+=(--parser "$PARSER_CMD")
+        set +e
+        doubletake "${args[@]}"
+        status=$?
+        set -e
+        leaks=$(python -c "import json,sys;print(json.load(open(sys.argv[1]))['summary']['leaks'])" "$OUT/report.json")
+        echo "leaks=$leaks" >> "$GITHUB_OUTPUT"
+        echo "report=$OUT/report.md" >> "$GITHUB_OUTPUT"
+        cat "$OUT/report.md" >> "$GITHUB_STEP_SUMMARY"
+        if [ "$FAIL" = "true" ] && [ "$leaks" != "0" ]; then
+          echo "::error::DoubleTake found $leaks split-view leak(s). See the job summary."
+          exit 1
+        fi
+        exit $status

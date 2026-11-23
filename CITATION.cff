@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use DoubleTake in research, please cite it as below."
+title: "DoubleTake: split-view red teaming for LLM document ingestion"
+type: software
+authors:
+  - alias: Aadithya-kl
+repository-code: "https://github.com/Aadithya-kl/doubletake"
+license: MIT
+version: 0.2.1
+date-released: 2026-11-23
+keywords:
+  - LLM security
+  - prompt injection
+  - document parsing
+  - red teaming
+  - RAG

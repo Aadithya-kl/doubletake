@@ -1,0 +1,29 @@
+name: Parser or loader result
+description: Share how a parser/loader/product behaves under DoubleTake
+labels: ["parser-results"]
+body:
+  - type: input
+    id: parser
+    attributes:
+      label: Parser / loader / product and version
+      placeholder: "e.g. LangChain PyPDFLoader 0.3.x, Docling 2.x, Unstructured 0.16"
+    validations: { required: true }
+  - type: textarea
+    id: command
+    attributes:
+      label: Command you ran
+      render: shell
+      placeholder: doubletake probe --parser-py "my_loaders:docling_any" --format pdf
+    validations: { required: true }
+  - type: textarea
+    id: summary
+    attributes:
+      label: Result summary
+      description: Paste the "Parser exposure" table from report.md.
+    validations: { required: true }
+  - type: checkboxes
+    id: adapter
+    attributes:
+      label: Adapter
+      options:
+        - label: I can open a PR adding this as a built-in parser or a documented adapter
