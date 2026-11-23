@@ -32,6 +32,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Leaky parser reports leaks (no fail)
+        id: report
+        uses: ./
+        with:
+          formats: pdf
+          only: pypdf
+          fail-on-leak: "false"
+      - name: Assert leak count output
+        run: test "${{ steps.report.outputs.leaks }}" -gt 0
       - name: Leaky parser must fail the action
         id: leaky
         continue-on-error: true
@@ -39,10 +48,9 @@ jobs:
         with:
           formats: pdf
           only: pypdf
-      - name: Assert it failed and counted leaks
-        run: |
-          test "${{ steps.leaky.outcome }}" = "failure"
-          test "${{ steps.leaky.outputs.leaks }}" -gt 0
+          install-system-deps: "false"
+      - name: Assert it failed
+        run: test "${{ steps.leaky.outcome }}" = "failure"
       - name: Non-leaking technique must pass
         uses: ./
         with:

@@ -280,6 +280,8 @@ def test_cli_forge_selftest_and_listing(tmp_path):
     assert r.returncode == 0 and (tmp_path / "CANARY.txt").read_text().strip() == "DTKAAAAAAAA"
     assert len(list(tmp_path.glob("*.eml"))) == 3
     assert cli("selftest").returncode == 0
+    only_pdf = cli("selftest", "--format", "pdf")
+    assert only_pdf.returncode == 0 and "pdf" in only_pdf.stdout and "docx" not in only_pdf.stdout
     assert "pdf.white_text" in cli("techniques").stdout
     assert "pypdf" in cli("parsers").stdout
     assert cli("--version").stdout.strip().endswith("0.2.1")

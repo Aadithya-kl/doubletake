@@ -73,7 +73,12 @@ runs:
 
     - name: Self-test the human view
       shell: bash
-      run: doubletake selftest
+      env:
+        FORMATS: ${{ inputs.formats }}
+      run: |
+        args=(selftest)
+        for f in $FORMATS; do args+=(--format "$f"); done
+        doubletake "${args[@]}"
 
     - name: Probe
       id: probe

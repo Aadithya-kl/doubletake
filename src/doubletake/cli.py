@@ -146,7 +146,8 @@ def forge(outdir, fmts, canary):
 
 
 @main.command()
-def selftest():
+@click.option("--format", "fmts", multiple=True, type=_FMT, help="Only check these formats (repeatable).")
+def selftest(fmts):
     """Check that rendering + OCR work here, using documents where the payload is VISIBLE.
 
     If a visible payload is not detected, the human view is broken and probe results would be false leaks.
@@ -160,6 +161,8 @@ def selftest():
     canary, ok = new_canary(), True
     with tempfile.TemporaryDirectory() as td:
         for t in CONTROLS:
+            if fmts and t.fmt not in fmts:
+                continue
             seen, err = human_view(t.build(Path(td) / t.id.replace(".", "_"), canary), canary)
             good = seen is True
             ok &= good

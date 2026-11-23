@@ -5,6 +5,7 @@
 - **GitHub Action**: `uses: Aadithya-kl/doubletake@v0.2.1`, with job summary, SARIF, a `leaks` output and installation of only the system packages your formats need.
 - Published on PyPI as **`doubletake-ai`** (the `doubletake` name belongs to an unrelated project). The command and import name stay `doubletake`.
 - Release workflow with PyPI trusted publishing.
+- `doubletake selftest --format` checks only the formats you use. The Action passes its `formats` through, so a PDF-only run no longer needs LibreOffice.
 - Hero image, social preview, issue and PR templates, code of conduct, citation file.
 
 ## 0.2.0 (2026-11-23)
